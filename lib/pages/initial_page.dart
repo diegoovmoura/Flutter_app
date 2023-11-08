@@ -13,8 +13,8 @@ class InitialPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
                 const Text(
                   "GE-CON",
                   style: TextStyle(
@@ -35,9 +35,9 @@ class InitialPage extends StatelessWidget {
                       fontSize: 15),
                 ),
                 const SizedBox(height: 30),
-                MyButton(onTap: () {}, text: "Sign In"),
+                MyButton(onTap: () => Navigator.pushNamed(context, '/login_page'), text: "Sign In"),
                 const SizedBox(height: 10),
-                MyButton(onTap: () {}, text: "Sign Up"),
+                MyButton(onTap: () => Navigator.pushNamed(context, '/register_page'), text: "Sign Up"),
               ],
             ),
           ),
