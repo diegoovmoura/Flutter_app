@@ -24,7 +24,7 @@ class InitialPage extends StatelessWidget {
                   size: 150,
                 ),
                 Text(
-                  "Seja Bem Vindo, ao aplicativo que vai deixar você por dentro de tudo que acontece no seu condomínio",
+                  "Seja Bem Vindo ao aplicativo que vai deixar você por dentro de tudo que acontece no seu condomínio",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
