@@ -7,7 +7,7 @@ class InitialPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -17,27 +17,28 @@ class InitialPage extends StatelessWidget {
               children: [
                 const Text(
                   "GE-CON",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                      fontSize: 24),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
                 const Icon(
                   Icons.house_rounded,
                   size: 150,
                 ),
-                const Text(
+                Text(
                   "Seja Bem Vindo, ao aplicativo que vai deixar você por dentro de tudo que acontece no seu condomínio",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      color: Color.fromARGB(255, 104, 104, 104),
+                      color: Theme.of(context).colorScheme.inversePrimary,
                       fontSize: 15),
                 ),
                 const SizedBox(height: 30),
-                MyButton(onTap: () => Navigator.pushNamed(context, '/login_page'), text: "Sign In"),
+                MyButton(
+                    onTap: () => Navigator.pushNamed(context, '/login_page'),
+                    text: "Sign In"),
                 const SizedBox(height: 10),
-                MyButton(onTap: () => Navigator.pushNamed(context, '/register_page'), text: "Sign Up"),
+                MyButton(
+                    onTap: () => Navigator.pushNamed(context, '/register_page'),
+                    text: "Sign Up"),
               ],
             ),
           ),
