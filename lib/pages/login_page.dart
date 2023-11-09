@@ -13,20 +13,24 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 243, 237, 237),
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Icon(Icons.person, size: 150),
+            SizedBox(height: 20),
             Text(
-              "G e C o n",
+              "Faça seu Login",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.blueGrey,
                   fontSize: 30),
             ),
-            SizedBox(height: 20),
-            Icon(Icons.person, size: 60),
           ],
         ),
       ),
