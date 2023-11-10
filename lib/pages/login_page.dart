@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:dart_app_version/components/my_button.dart';
 import 'package:dart_app_version/components/my_text_field.dart';
+import 'package:dart_app_version/helper/helper_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,7 +18,22 @@ class _LoginPageState extends State<LoginPage> {
 
   TextEditingController passwordCntroler = TextEditingController();
 
-  void login() {}
+  void login() async {
+    showDialog(
+        context: context,
+        builder: (context) => Center(
+              child: CircularProgressIndicator(),
+            ));
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailCntroler.text, password: passwordCntroler.text);
+      if (context.mounted) Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      showMessage(e.code, context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

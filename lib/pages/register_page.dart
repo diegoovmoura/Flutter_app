@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:dart_app_version/components/my_button.dart';
 import 'package:dart_app_version/components/my_text_field.dart';
+import 'package:dart_app_version/helper/helper_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -13,10 +15,33 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailCntroler = TextEditingController();
-
+  TextEditingController userControler = TextEditingController();
   TextEditingController passwordCntroler = TextEditingController();
+  TextEditingController confirmPasswordCntroler = TextEditingController();
 
-  void register() {}
+  void register() async {
+    showDialog(
+        context: context,
+        builder: (context) => Center(
+              child: CircularProgressIndicator(),
+            ));
+
+    if (passwordCntroler.text != confirmPasswordCntroler.text) {
+      Navigator.pop(context);
+
+      showMessage("Senhas precisam ser iguais!", context);
+    } else {
+      try {
+        UserCredential? userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: emailCntroler.text, password: passwordCntroler.text);
+        Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        Navigator.pop(context);
+        showMessage(e.code, context);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
               MyTextField(
                   hintText: "Usuário:",
                   obscureText: false,
-                  controller: emailCntroler),
+                  controller: userControler),
               SizedBox(
                 height: 10,
               ),
@@ -65,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
               MyTextField(
                   hintText: "Conforme sua Senha:",
                   obscureText: true,
-                  controller: passwordCntroler),
+                  controller: confirmPasswordCntroler),
               SizedBox(
                 height: 25,
               ),
